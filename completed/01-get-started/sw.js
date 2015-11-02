@@ -1,6 +1,6 @@
 /*
 *
-*  Push Notfications codelab
+*  Push Notifications codelab
 *  Copyright 2015 Google Inc. All rights reserved.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,18 +17,22 @@
 *
 */
 
+// Version 0.1
+
 'use strict';
 
-var gulp = require('gulp');
-var eslint = require('gulp-eslint');
+console.log('Started', self);
 
-gulp.task('eslint', function() {
-  return gulp.src(['completed/**/*.js'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+self.addEventListener('install', function(event) {
+  self.skipWaiting();
+  console.log('Installed', event);
 });
 
-gulp.task('default', ['eslint'], function() {
-  // Runs if eslint task successful
+self.addEventListener('activate', function(event) {
+  console.log('Activated', event);
+});
+
+self.addEventListener('push', function(event) {
+  console.log('Push message received', event);
+  // TODO: Step 6
 });

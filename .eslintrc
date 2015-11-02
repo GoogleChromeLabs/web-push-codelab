@@ -47,4 +47,5 @@
     },
     "extends": "eslint:recommended",
   "globals": {
+      "clients": true
   }}

@@ -4,7 +4,9 @@
   "description": "Push notifications codelab.",
   "devDependencies": {
     "eslint": "^1.8.0",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-load-plugins": "^1.0.0"
   },
   "repository": {
     "type": "git",

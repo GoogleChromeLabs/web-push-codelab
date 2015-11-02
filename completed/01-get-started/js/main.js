@@ -1,6 +1,6 @@
 /*
 *
-*  Push Notfications codelab
+*  Push Notifications codelab
 *  Copyright 2015 Google Inc. All rights reserved.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,16 +19,14 @@
 
 'use strict';
 
-var gulp = require('gulp');
-var eslint = require('gulp-eslint');
-
-gulp.task('eslint', function() {
-  return gulp.src(['completed/**/*.js'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
-
-gulp.task('default', ['eslint'], function() {
-  // Runs if eslint task successful
-});
+if ('serviceWorker' in navigator) {
+  console.log('Service Worker is supported');
+  navigator.serviceWorker.register('sw.js').then(function() {
+    return navigator.serviceWorker.ready;
+  }).then(function(reg) {
+    console.log('Service Worker is ready :^)', reg);
+      // TODO: Step 4
+  }).catch(function(error) {
+    console.log('Service Worker error :^(', error);
+  });
+}
