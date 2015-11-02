@@ -1,0 +1,19 @@
+{
+  "name": "push-notifications",
+  "version": "1.0.0",
+  "description": "Push notifications codelab.",
+  "devDependencies": {
+    "eslint": "^1.8.0",
+    "gulp": "^3.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoogleChrome/push-notifications.git"
+  },
+  "author": "Sam Dutton",
+  "license": "Apache 2",
+  "bugs": {
+    "url": "https://github.com/GoogleChrome/push-notifications/issues"
+  },
+  "homepage": "https://github.com/GoogleChrome/push-notifications#readme"
+}
