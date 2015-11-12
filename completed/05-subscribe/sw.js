@@ -46,7 +46,7 @@ self.addEventListener('push', function(event) {
 
 self.addEventListener('notificationclick', function(event) {
   console.log('Notification click: tag', event.notification.tag);
-  // Android doesn't close the notification when you click on it
+  // Android doesn't close the notification when you click it
   // See http://crbug.com/463146
   event.notification.close();
 
