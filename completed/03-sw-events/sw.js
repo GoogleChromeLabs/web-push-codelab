@@ -34,5 +34,5 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('push', function(event) {
   console.log('Push message received', event);
-  // TODO: Step 6
+  // TODO
 });
