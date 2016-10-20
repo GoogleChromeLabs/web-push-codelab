@@ -35,12 +35,12 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('push', function(event) {
   console.log('Push message', event);
 
-  var title = 'Push message';
+  const title = 'Push message';
 
   event.waitUntil(
     self.registration.showNotification(title, {
-      'body': 'The Message',
-      'icon': 'images/icon.png'
+      body: 'The Message',
+      icon: 'images/icon.png'
     }));
 });
 
@@ -50,7 +50,7 @@ self.addEventListener('notificationclick', function(event) {
   // See http://crbug.com/463146
   event.notification.close();
 
-  var url = 'https://youtu.be/gYMkEMCHtJ4';
+  const url = 'https://youtu.be/gYMkEMCHtJ4';
   // Check if there's already a tab open with this URL.
   // If yes: focus on the tab.
   // If no: open a tab with the URL.
@@ -60,8 +60,8 @@ self.addEventListener('notificationclick', function(event) {
     })
     .then(function(windowClients) {
       console.log('WindowClients', windowClients);
-      for (var i = 0; i < windowClients.length; i++) {
-        var client = windowClients[i];
+      for (let i = 0; i < windowClients.length; i++) {
+        const client = windowClients[i];
         console.log('WindowClient', client);
         if (client.url === url && 'focus' in client) {
           return client.focus();

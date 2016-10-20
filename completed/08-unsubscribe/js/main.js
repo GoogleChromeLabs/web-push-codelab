@@ -19,10 +19,10 @@
 
 'use strict';
 
-var reg;
-var sub;
-var isSubscribed = false;
-var subscribeButton = document.querySelector('button');
+let reg;
+let sub;
+let isSubscribed = false;
+let subscribeButton = document.querySelector('button');
 
 if ('serviceWorker' in navigator) {
   console.log('Service Worker is supported');
@@ -46,8 +46,8 @@ subscribeButton.addEventListener('click', function() {
 });
 
 function subscribe() {
-  reg.pushManager.subscribe({userVisibleOnly: true}).
-  then(function(pushSubscription) {
+  reg.pushManager.subscribe({userVisibleOnly: true})
+  .then(function(pushSubscription) {
     sub = pushSubscription;
     console.log('Subscribed! Endpoint:', sub.endpoint);
     subscribeButton.textContent = 'Unsubscribe';

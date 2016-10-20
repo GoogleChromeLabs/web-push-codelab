@@ -2,11 +2,12 @@
   "name": "push-notifications",
   "version": "1.0.0",
   "description": "Push notifications codelab.",
+  "scripts": {
+    "lint": "eslint '.'"
+  },
   "devDependencies": {
-    "eslint": "^1.8.0",
-    "gulp": "^3.9.0",
-    "gulp-eslint": "^1.0.0",
-    "gulp-load-plugins": "^1.0.0"
+    "eslint": "^3.8.1",
+    "eslint-config-google": "^0.7.0"
   },
   "repository": {
     "type": "git",
