@@ -17,51 +17,113 @@
 *
 */
 
+/* eslint-env browser, es6 */
+
 'use strict';
 
-let reg;
-let sub;
+/* eslint-disable max-len */
+const applicationServerPublicKey = 'BKAIbzkaxJg2ovEYb78m_tjSbmNCFjLFw7AJUnOqWF855BtMeDMkmLqVwgweWQCpGg446uEu3TpfG-UQZ6osRV8';
+/* eslint-enable max-len */
+
+const pushButton = document.querySelector('.js-push-btn');
 let isSubscribed = false;
-let subscribeButton = document.querySelector('button');
+let swRegistration = null;
 
-if ('serviceWorker' in navigator) {
-  console.log('Service Worker is supported');
-  navigator.serviceWorker.register('sw.js').then(function() {
-    return navigator.serviceWorker.ready;
-  }).then(function(serviceWorkerRegistration) {
-    reg = serviceWorkerRegistration;
-    subscribeButton.disabled = false;
-    console.log('Service Worker is ready :^)', reg);
-  }).catch(function(error) {
-    console.log('Service Worker Error :^(', error);
-  });
-}
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
 
-subscribeButton.addEventListener('click', function() {
-  if (isSubscribed) {
-    unsubscribe();
-  } else {
-    subscribe();
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
   }
-});
+  return outputArray;
+}
 
-function subscribe() {
-  reg.pushManager.subscribe({userVisibleOnly: true})
+function updateBtn() {
+  if (Notification.permission === 'denied') {
+    pushButton.textContent = 'Push Messaging Blocked.';
+    pushButton.disabled = true;
+    return;
+  }
+  if (isSubscribed) {
+    pushButton.textContent = 'Disable Push Messaging';
+  } else {
+    pushButton.textContent = 'Enable Push Messaging';
+  }
+
+  pushButton.disabled = false;
+}
+
+function subscribeUser() {
+  swRegistration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(applicationServerPublicKey)
+  })
   .then(function(pushSubscription) {
-    sub = pushSubscription;
-    console.log('Subscribed! Endpoint:', sub.endpoint);
-    subscribeButton.textContent = 'Unsubscribe';
+    console.log('Subscribed:', pushSubscription);
     isSubscribed = true;
+  })
+  .then(function() {
+    updateBtn();
+  })
+  .catch(function() {
+    updateBtn();
   });
 }
 
-function unsubscribe() {
-  sub.unsubscribe().then(function(event) {
-    subscribeButton.textContent = 'Subscribe';
-    console.log('Unsubscribed!', event);
-    isSubscribed = false;
-  }).catch(function(error) {
+function unsubscribeUser() {
+  swRegistration.pushManager.getSubscription()
+  .then(function(subscription) {
+    if (subscription) {
+      return subscription.unsubscribe();
+    }
+  })
+  .catch(function(error) {
     console.log('Error unsubscribing', error);
-    subscribeButton.textContent = 'Subscribe';
+  })
+  .then(function() {
+    isSubscribed = false;
+
+    updateBtn();
   });
+}
+
+function initialiseUI() {
+  pushButton.addEventListener('click', function() {
+    if (isSubscribed) {
+      unsubscribeUser();
+    } else {
+      subscribeUser();
+    }
+  });
+
+  swRegistration.pushManager.getSubscription()
+  .then(function(subscription) {
+    isSubscribed = !(subscription === null);
+
+    updateBtn();
+  });
+}
+
+// TODO: Check push manager exists
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+  console.log('Service Worker is supported');
+  navigator.serviceWorker.register('sw.js')
+  .then(function(swReg) {
+    console.log('Service Worker is registered');
+
+    swRegistration = swReg;
+    initialiseUI();
+  })
+  .catch(function(error) {
+    console.error('Service Worker Error', error);
+  });
+} else {
+  console.warn('Push messaging is not supported');
+  pushButton.textContent = 'Push Not Supported';
 }

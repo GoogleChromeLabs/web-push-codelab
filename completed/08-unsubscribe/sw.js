@@ -17,20 +17,9 @@
 *
 */
 
-// Version 0.1
+/* eslint-env browser, serviceworker, es6 */
 
 'use strict';
-
-console.log('Started', self);
-
-self.addEventListener('install', function(event) {
-  self.skipWaiting();
-  console.log('Installed', event);
-});
-
-self.addEventListener('activate', function(event) {
-  console.log('Activated', event);
-});
 
 self.addEventListener('push', function(event) {
   console.log('Push message', event);
@@ -46,10 +35,11 @@ self.addEventListener('push', function(event) {
 
 self.addEventListener('notificationclick', function(event) {
   console.log('Notification click: tag', event.notification.tag);
-  // Android doesn't close the notification when you click it
-  // See http://crbug.com/463146
+
   event.notification.close();
-  const url = 'https://youtu.be/gYMkEMCHtJ4';
+
+  const url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+
   // Check if there's already a tab open with this URL.
   // If yes: focus on the tab.
   // If no: open a tab with the URL.

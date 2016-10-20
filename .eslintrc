@@ -1,9 +1,5 @@
 {
   "extends": ["eslint:recommended", "google"],
-  "env": {
-    "browser": true,
-    "serviceworker": true
-  },
   "rules": {
     "no-var": 2,
     "no-console": 0,

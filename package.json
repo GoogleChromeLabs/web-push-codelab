@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Push notifications codelab.",
   "scripts": {
-    "lint": "eslint '.'"
+    "lint": "eslint '.'",
+    "test": "npm run lint"
   },
   "devDependencies": {
     "eslint": "^3.8.1",
