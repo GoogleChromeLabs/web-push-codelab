@@ -28,3 +28,7 @@ main, header > h1 {
 main {
   padding: 24px 0;
 }
+
+pre {
+  white-space: pre-wrap; 
+}

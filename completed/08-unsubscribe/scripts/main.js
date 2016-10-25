@@ -22,10 +22,22 @@
 'use strict';
 
 /* eslint-disable max-len */
-const applicationServerPublicKey = 'BKAIbzkaxJg2ovEYb78m_tjSbmNCFjLFw7AJUnOqWF855BtMeDMkmLqVwgweWQCpGg446uEu3TpfG-UQZ6osRV8';
+const applicationServerPublicKey = 'BH8-hIchXKMI6AKSee8gD0hhPThRqaEhIEtMJwcTjEQhiOKdG-_2tTIO-6hOAK4kwg5M9Saedjxp4hVE-khhWxY';
 /* eslint-enable max-len */
 
+// IMPORTANT: You should NEVER share you application servers private key.
+// We are doing it here to simplify the code lab.
+/* eslint-disable max-len */
+const applicationServerPriveKey = 'Ev-QDJE7KPAkM2tu023PW_GCYpXNjL-r13fV53gPJRM';
+/* eslint-end max-len */
+
+// IMPORTANT: You should NEVER share you GCM API key.
+// We are doing it here to simplify the code lab.
+const gcmApiKey = '';
+
 const pushButton = document.querySelector('.js-push-btn');
+const pushCLI = document.querySelector('.js-web-push-cli');
+
 let isSubscribed = false;
 let swRegistration = null;
 
@@ -60,19 +72,48 @@ function updateBtn() {
   pushButton.disabled = false;
 }
 
+function sendToServer(subscription) {
+  const jsonString = JSON.stringify(subscription);
+  console.log('Subscription as JSON String: ', jsonString);
+
+  // On the server this would then be parsed and the values used.
+  // Notice that the keys are now base64 url encoded.
+  const parsedSubscription = JSON.parse(jsonString);
+
+
+  const values = [
+    `--endpoint ${parsedSubscription.endpoint}`,
+    `--auth ${parsedSubscription.keys.auth}`,
+    `--key ${parsedSubscription.keys.p256dh}`,
+    `--vapid-subject https://developers.google.com/web/push-codelab/`,
+    `--vapid-pubkey ${applicationServerPublicKey}`,
+    `--vapid-pvtkey ${applicationServerPriveKey}`,
+  ];
+
+  if (gcmApiKey && gcmApiKey.length > 0) {
+    values.push(`--gcm-api-key ${gcmApiKey}`);
+  }
+
+  pushCLI.textContent = `web-push send-notification ${values.join(' ')}`;
+}
+
 function subscribeUser() {
   swRegistration.pushManager.subscribe({
     userVisibleOnly: true,
     applicationServerKey: urlBase64ToUint8Array(applicationServerPublicKey)
   })
-  .then(function(pushSubscription) {
-    console.log('Subscribed:', pushSubscription);
+  .then(function(subscription) {
+    console.log('Subscribed:', subscription);
+
+    sendToServer(subscription);
+
     isSubscribed = true;
   })
   .then(function() {
     updateBtn();
   })
-  .catch(function() {
+  .catch(function(err) {
+    console.log(err);
     updateBtn();
   });
 }
@@ -89,6 +130,7 @@ function unsubscribeUser() {
   })
   .then(function() {
     isSubscribed = false;
+    pushCLI.textContent = '';
 
     updateBtn();
   });
@@ -108,6 +150,10 @@ function initialiseUI() {
   swRegistration.pushManager.getSubscription()
   .then(function(subscription) {
     isSubscribed = !(subscription === null);
+
+    if (isSubscribed) {
+      sendToServer(subscription);
+    }
 
     updateBtn();
   });

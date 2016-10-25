@@ -29,16 +29,17 @@ self.addEventListener('push', function(event) {
   event.waitUntil(
     self.registration.showNotification(title, {
       body: 'The Message',
-      icon: 'images/icon.png'
+      icon: 'images/icon.png',
+      badge: 'images/badge.png'
     }));
 });
 
 self.addEventListener('notificationclick', function(event) {
-  console.log('Notification click: tag', event.notification.tag);
+  console.log('Notification click with tag: ', event.notification.tag);
 
   event.notification.close();
 
-  const url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  const url = self.location.origin;
 
   // Check if there's already a tab open with this URL.
   // If yes: focus on the tab.
