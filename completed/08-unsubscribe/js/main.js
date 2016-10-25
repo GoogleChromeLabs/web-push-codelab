@@ -50,6 +50,7 @@ function updateBtn() {
     pushButton.disabled = true;
     return;
   }
+
   if (isSubscribed) {
     pushButton.textContent = 'Disable Push Messaging';
   } else {
@@ -95,6 +96,7 @@ function unsubscribeUser() {
 
 function initialiseUI() {
   pushButton.addEventListener('click', function() {
+    pushButton.disabled = true;
     if (isSubscribed) {
       unsubscribeUser();
     } else {
@@ -102,6 +104,7 @@ function initialiseUI() {
     }
   });
 
+  // Set the initial subscription value
   swRegistration.pushManager.getSubscription()
   .then(function(subscription) {
     isSubscribed = !(subscription === null);
@@ -110,9 +113,9 @@ function initialiseUI() {
   });
 }
 
-// TODO: Check push manager exists
 if ('serviceWorker' in navigator && 'PushManager' in window) {
-  console.log('Service Worker is supported');
+  console.log('Service Worker and Push is supported');
+
   navigator.serviceWorker.register('sw.js')
   .then(function(swReg) {
     console.log('Service Worker is registered');
