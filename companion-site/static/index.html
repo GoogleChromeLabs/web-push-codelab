@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Push Companion</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>Push Companion</h1>
+  </header>
+
+  <main>
+    <h3>Application Server Keys</h3>
+    <p>Application server keys are used to idenitfy your application server
+      with a push service.</p>
+
+    <p><strong>Public Key</strong></p>
+    <pre><code class="js-public-key">Loading...</code></pre>
+
+    <p><strong>Private Key</strong></p>
+    <pre><code class="js-private-key">Loading...</code></pre>
+
+    <p>
+      <button disabled class="js-refresh-keys mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        Refresh Keys
+      </button>
+    </p>
+
+    <hr />
+
+    <h3>Send a Push Message</h3>
+
+    <h6>Subscription to Send To</h6>
+    <div class="mdl-textfield mdl-js-textfield">
+      <textarea class="mdl-textfield__input" type="text" rows= "3" id="push-subscription" ></textarea>
+      <label class="mdl-textfield__label" for="push-subscription">Add Push Subscription Here....</label>
+    </div>
+
+    <h6>Text to Send</h6>
+    <div class="mdl-textfield mdl-js-textfield">
+      <textarea class="mdl-textfield__input" type="text" rows= "3" id="push-data" ></textarea>
+      <label class="mdl-textfield__label" for="push-data">Add Push Text Here....</label>
+    </div>
+
+  </main>
+
+  <script src="scripts/application-server-key.js"></script>
+
+  <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+</body>
+</html>
