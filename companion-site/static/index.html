@@ -40,21 +40,28 @@
 
     <h3>Send a Push Message</h3>
 
-    <h6>Subscription to Send To</h6>
+    <p><strong>Subscription to Send To</strong></p>
     <div class="mdl-textfield mdl-js-textfield">
       <textarea class="mdl-textfield__input" type="text" rows= "3" id="push-subscription" ></textarea>
       <label class="mdl-textfield__label" for="push-subscription">Add Push Subscription Here....</label>
     </div>
 
-    <h6>Text to Send</h6>
+    <p><strong>Text to Send</strong></p>
     <div class="mdl-textfield mdl-js-textfield">
       <textarea class="mdl-textfield__input" type="text" rows= "3" id="push-data" ></textarea>
       <label class="mdl-textfield__label" for="push-data">Add Push Text Here....</label>
     </div>
 
+    <p>
+      <button disabled class="js-send-push mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        Send Push Message
+      </button>
+    </p>
+
   </main>
 
   <script src="scripts/application-server-key.js"></script>
+  <script src="scripts/send-message.js"></script>
 
   <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 </body>
