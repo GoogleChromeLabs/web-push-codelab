@@ -17,29 +17,6 @@
 *
 */
 
-/* eslint-env browser, es6 */
+/* eslint-env browser, serviceworker, es6 */
 
 'use strict';
-
-/* eslint-disable max-len */
-const applicationServerPublicKey = '';
-/* eslint-enable max-len */
-
-const pushButton = document.querySelector('.js-push-btn');
-let isSubscribed = false;
-let swRegistration = null;
-
-function urlBase64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - base64String.length % 4) % 4);
-  const base64 = (base64String + padding)
-    .replace(/\-/g, '+')
-    .replace(/_/g, '/');
-
-  const rawData = window.atob(base64);
-  const outputArray = new Uint8Array(rawData.length);
-
-  for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i);
-  }
-  return outputArray;
-}

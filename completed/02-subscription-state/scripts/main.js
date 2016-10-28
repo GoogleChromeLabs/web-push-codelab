@@ -25,8 +25,8 @@
 
 // IMPORTANT: You should NEVER share you application servers private key.
 // We are doing it here to simplify the code lab.
-const applicationServerPublicKey = 'BH8-hIchXKMI6AKSee8gD0hhPThRqaEhIEtMJwcTjEQhiOKdG-_2tTIO-6hOAK4kwg5M9Saedjxp4hVE-khhWxY';
-const applicationServerPriveKey = 'Ev-QDJE7KPAkM2tu023PW_GCYpXNjL-r13fV53gPJRM';
+const applicationServerPublicKey = '<Your Public Key>';
+const applicationServerPrivateKey = '<Your Private Key';
 
 /* eslint-enable max-len */
 
@@ -56,12 +56,6 @@ function urlB64ToUint8Array(base64String) {
 }
 
 function updateBtn() {
-  if (Notification.permission === 'denied') {
-    pushButton.textContent = 'Push Messaging Blocked.';
-    pushButton.disabled = true;
-    return;
-  }
-
   if (isSubscribed) {
     pushButton.textContent = 'Disable Push Messaging';
   } else {
@@ -71,56 +65,7 @@ function updateBtn() {
   pushButton.disabled = false;
 }
 
-function subscribeUser() {
-  const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
-  swRegistration.pushManager.subscribe({
-    userVisibleOnly: true,
-    applicationServerKey: applicationServerKey
-  })
-  .then(function(subscription) {
-    console.log('User is subscribed:', subscription);
-
-    // TODO: Send subscription to application server
-
-    isSubscribed = true;
-
-    updateBtn();
-  })
-  .catch(function(err) {
-    console.log('Failed to subscribe the user: ', err);
-    updateBtn();
-  });
-}
-
-function unsubscribeUser() {
-  swRegistration.pushManager.getSubscription()
-  .then(function(subscription) {
-    if (subscription) {
-      // TODO: May want to tell application server to delete this subscription
-      return subscription.unsubscribe();
-    }
-  })
-  .catch(function(error) {
-    console.log('Error unsubscribing', error);
-  })
-  .then(function() {
-    console.log('User is unsubscribed.');
-    isSubscribed = false;
-
-    updateBtn();
-  });
-}
-
 function initialiseUI() {
-  pushButton.addEventListener('click', function() {
-    pushButton.disabled = true;
-    if (isSubscribed) {
-      unsubscribeUser();
-    } else {
-      subscribeUser();
-    }
-  });
-
   // Set the initial subscription value
   swRegistration.pushManager.getSubscription()
   .then(function(subscription) {

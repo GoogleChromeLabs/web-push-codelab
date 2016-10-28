@@ -92,30 +92,13 @@ function subscribeUser() {
   });
 }
 
-function unsubscribeUser() {
-  swRegistration.pushManager.getSubscription()
-  .then(function(subscription) {
-    if (subscription) {
-      // TODO: May want to tell application server to delete this subscription
-      return subscription.unsubscribe();
-    }
-  })
-  .catch(function(error) {
-    console.log('Error unsubscribing', error);
-  })
-  .then(function() {
-    console.log('User is unsubscribed.');
-    isSubscribed = false;
-
-    updateBtn();
-  });
-}
-
 function initialiseUI() {
   pushButton.addEventListener('click', function() {
+    // Disable button so we only call subscribe once.
     pushButton.disabled = true;
+
     if (isSubscribed) {
-      unsubscribeUser();
+      console.log('We need to unsubscribe the user.');
     } else {
       subscribeUser();
     }
