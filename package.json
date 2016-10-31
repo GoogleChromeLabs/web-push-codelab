@@ -4,7 +4,8 @@
   "description": "Push notifications codelab.",
   "scripts": {
     "lint": "eslint '.'",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "deploy": "gcloud app deploy"
   },
   "devDependencies": {
     "eslint": "^3.8.1",
@@ -14,7 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/GoogleChrome/push-notifications.git"
   },
-  "author": "Sam Dutton",
   "license": "Apache 2",
   "bugs": {
     "url": "https://github.com/GoogleChrome/push-notifications/issues"

@@ -7,3 +7,11 @@ Install pip:
 Install dependencies with:
 
     pip install -t third_party -r requirements.txt
+
+To run companion site locally:
+
+   node app.js
+
+To deploy:
+
+    npm run deploy
