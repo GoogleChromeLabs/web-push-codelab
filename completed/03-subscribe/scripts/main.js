@@ -21,9 +21,8 @@
 
 'use strict';
 
-/* eslint-disable max-len */
-const applicationServerPublicKey = 'BH8-hIchXKMI6AKSee8gD0hhPThRqaEhIEtMJwcTjEQhiOKdG-_2tTIO-6hOAK4kwg5M9Saedjxp4hVE-khhWxY';
-/* eslint-enable max-len */
+const applicationServerPublicKey = 'BCW6JPG-T7Jx0bYKMhAbL6j3DL3VTTib7dwvBjQ' +
+  'C_496a12auzzKFnjgFjCsys_YtWkeMLhogfSlyM0CaIktx7o';
 
 const pushButton = document.querySelector('.js-push-btn');
 
@@ -55,6 +54,21 @@ function updateBtn() {
   pushButton.disabled = false;
 }
 
+function updateSubscriptionOnServer(subscription) {
+  // TODO: Send subscription to application server
+
+  const subscriptionJson = document.querySelector('.js-subscription-json');
+  const subscriptionDetails =
+    document.querySelector('.js-subscription-details');
+
+  if (subscription) {
+    subscriptionJson.textContent = JSON.stringify(subscription);
+    subscriptionDetails.classList.remove('is-invisible');
+  } else {
+    subscriptionDetails.classList.add('is-invisible');
+  }
+}
+
 function subscribeUser() {
   const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
   swRegistration.pushManager.subscribe({
@@ -63,6 +77,8 @@ function subscribeUser() {
   })
   .then(function(subscription) {
     console.log('User is subscribed:', subscription);
+
+    updateSubscriptionOnServer(subscription);
 
     isSubscribed = true;
 
@@ -76,11 +92,9 @@ function subscribeUser() {
 
 function initialiseUI() {
   pushButton.addEventListener('click', function() {
-    // Disable button so we only call subscribe once.
     pushButton.disabled = true;
-
     if (isSubscribed) {
-      console.log('We need to unsubscribe the user.');
+      // TODO: Unsubscribe user
     } else {
       subscribeUser();
     }
@@ -90,6 +104,8 @@ function initialiseUI() {
   swRegistration.pushManager.getSubscription()
   .then(function(subscription) {
     isSubscribed = !(subscription === null);
+
+    updateSubscriptionOnServer(subscription);
 
     if (isSubscribed) {
       console.log('User IS subscribed.');

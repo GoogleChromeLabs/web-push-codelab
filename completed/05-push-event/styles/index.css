@@ -14,19 +14,21 @@ body {
 }
 
 header {
-  padding: 115px 16px 32px 16px;
-  box-sizing: border-box;
+  padding: 115px 0 32px 0;
   background-color: #00bcd4;
   color: white;
 }
 
 main, header > h1 {
-  width: 760px;
+  padding: 0 16px;
+  max-width: 760px;
+  box-sizing: border-box;
   margin: 0 auto;
 }
 
 main {
-  padding: 24px 0;
+  margin: 24px auto;
+  box-sizing: border-box;
 }
 
 pre {
@@ -45,4 +47,10 @@ pre code {
 
 .subscription-details {
   transition: opacity 1s;
+}
+
+@media (max-width: 600px) {
+  header > h1 {
+    font-size: 36px;
+  }
 }

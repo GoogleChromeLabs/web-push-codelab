@@ -21,9 +21,8 @@
 
 'use strict';
 
-/* eslint-disable max-len */
-const applicationServerPublicKey = 'BH8-hIchXKMI6AKSee8gD0hhPThRqaEhIEtMJwcTjEQhiOKdG-_2tTIO-6hOAK4kwg5M9Saedjxp4hVE-khhWxY';
-/* eslint-enable max-len */
+const applicationServerPublicKey = 'BCW6JPG-T7Jx0bYKMhAbL6j3DL3VTTib7dwvBjQ' +
+  'C_496a12auzzKFnjgFjCsys_YtWkeMLhogfSlyM0CaIktx7o';
 
 const pushButton = document.querySelector('.js-push-btn');
 
@@ -49,6 +48,7 @@ function updateBtn() {
   if (Notification.permission === 'denied') {
     pushButton.textContent = 'Push Messaging Blocked.';
     pushButton.disabled = true;
+    updateSubscriptionOnServer(null);
     return;
   }
 
