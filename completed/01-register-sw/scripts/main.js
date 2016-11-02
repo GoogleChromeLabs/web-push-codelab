@@ -21,24 +21,9 @@
 
 'use strict';
 
-/* eslint-disable max-len */
-
-// IMPORTANT: You should NEVER share you application servers private key.
-// We are doing it here to simplify the code lab.
 const applicationServerPublicKey = '<Your Public Key>';
-const applicationServerPrivateKey = '<Your Private Key';
-
-/* eslint-enable max-len */
-
-// IMPORTANT: You should NEVER share you GCM API key.
-// We are doing it here to simplify the code lab.
-const gcmApiKey = '';
 
 const pushButton = document.querySelector('.js-push-btn');
-const pushCLI = document.querySelector('.js-web-push-cli');
-
-let isSubscribed = false;
-let swRegistration = null;
 
 function urlB64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);

@@ -21,21 +21,10 @@
 
 'use strict';
 
-/* eslint-disable max-len */
-
-// IMPORTANT: You should NEVER share you application servers private key.
-// We are doing it here to simplify the code lab.
-const applicationServerPublicKey = 'BH8-hIchXKMI6AKSee8gD0hhPThRqaEhIEtMJwcTjEQhiOKdG-_2tTIO-6hOAK4kwg5M9Saedjxp4hVE-khhWxY';
-const applicationServerPriveKey = 'Ev-QDJE7KPAkM2tu023PW_GCYpXNjL-r13fV53gPJRM';
-
-/* eslint-enable max-len */
-
-// IMPORTANT: You should NEVER share you GCM API key.
-// We are doing it here to simplify the code lab.
-const gcmApiKey = '';
+const applicationServerPublicKey = 'BJPMaDrbRiUzH8IeMvRMn7CcxFMIQzTEB1j62Kn' +
+  'gB5irgMhB9TPgcmMjwB7t1aRkUKDwzz9MMH3ASEKLKX_mqjk';
 
 const pushButton = document.querySelector('.js-push-btn');
-const pushCLI = document.querySelector('.js-web-push-cli');
 
 let isSubscribed = false;
 let swRegistration = null;
@@ -71,6 +60,21 @@ function updateBtn() {
   pushButton.disabled = false;
 }
 
+function updateSubscriptionOnServer(subscription) {
+  // TODO: Send subscription to application server
+
+  const subscriptionJson = document.querySelector('.js-subscription-json');
+  const subscriptionDetails =
+    document.querySelector('.js-subscription-details');
+
+  if (subscription) {
+    subscriptionJson.textContent = JSON.stringify(subscription);
+    subscriptionDetails.classList.remove('is-invisible');
+  } else {
+    subscriptionDetails.classList.add('is-invisible');
+  }
+}
+
 function subscribeUser() {
   const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
   swRegistration.pushManager.subscribe({
@@ -80,7 +84,7 @@ function subscribeUser() {
   .then(function(subscription) {
     console.log('User is subscribed:', subscription);
 
-    // TODO: Send subscription to application server
+    updateSubscriptionOnServer(subscription);
 
     isSubscribed = true;
 
@@ -96,7 +100,6 @@ function unsubscribeUser() {
   swRegistration.pushManager.getSubscription()
   .then(function(subscription) {
     if (subscription) {
-      // TODO: May want to tell application server to delete this subscription
       return subscription.unsubscribe();
     }
   })
@@ -104,6 +107,8 @@ function unsubscribeUser() {
     console.log('Error unsubscribing', error);
   })
   .then(function() {
+    updateSubscriptionOnServer(null);
+
     console.log('User is unsubscribed.');
     isSubscribed = false;
 
@@ -126,8 +131,9 @@ function initialiseUI() {
   .then(function(subscription) {
     isSubscribed = !(subscription === null);
 
+    updateSubscriptionOnServer(subscription);
+
     if (isSubscribed) {
-      // TODO: Send subscription to application server
       console.log('User IS subscribed.');
     } else {
       console.log('User is NOT subscribed.');

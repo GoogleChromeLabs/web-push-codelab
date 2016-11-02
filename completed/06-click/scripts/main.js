@@ -22,20 +22,10 @@
 'use strict';
 
 /* eslint-disable max-len */
-
-// IMPORTANT: You should NEVER share you application servers private key.
-// We are doing it here to simplify the code lab.
 const applicationServerPublicKey = 'BH8-hIchXKMI6AKSee8gD0hhPThRqaEhIEtMJwcTjEQhiOKdG-_2tTIO-6hOAK4kwg5M9Saedjxp4hVE-khhWxY';
-const applicationServerPriveKey = 'Ev-QDJE7KPAkM2tu023PW_GCYpXNjL-r13fV53gPJRM';
-
 /* eslint-enable max-len */
 
-// IMPORTANT: You should NEVER share you GCM API key.
-// We are doing it here to simplify the code lab.
-const gcmApiKey = '';
-
 const pushButton = document.querySelector('.js-push-btn');
-const pushCLI = document.querySelector('.js-web-push-cli');
 
 let isSubscribed = false;
 let swRegistration = null;
@@ -110,7 +100,6 @@ function initialiseUI() {
     isSubscribed = !(subscription === null);
 
     if (isSubscribed) {
-      // TODO: Send subscription to application server
       console.log('User IS subscribed.');
     } else {
       console.log('User is NOT subscribed.');
