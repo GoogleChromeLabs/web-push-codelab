@@ -14,6 +14,8 @@
 # [START app_yaml]
 runtime: nodejs
 vm: true
-- url: .*
+handlers:
+- url: /.*
+  script: IGNORED
   secure: always
 # [END app_yaml]
