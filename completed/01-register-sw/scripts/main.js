@@ -18,6 +18,7 @@
 */
 
 /* eslint-env browser, es6 */
+/* eslint-disable no-unused-vars */
 
 'use strict';
 
