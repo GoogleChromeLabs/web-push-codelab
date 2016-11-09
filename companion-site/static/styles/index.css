@@ -40,3 +40,11 @@ pre {
 .mdl-textfield__input {
   min-height: 116px;
 }
+
+section {
+  margin-bottom: 96px;
+}
+
+section h6 {
+  margin-bottom: 0;
+}
