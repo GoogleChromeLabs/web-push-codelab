@@ -20,7 +20,7 @@ header {
   color: white;
 }
 
-main, header > h1 {
+main, header > h1, footer > div {
   max-width: 760px;
   margin: 0 auto;
 }
@@ -47,4 +47,14 @@ section {
 
 section h6 {
   margin-bottom: 0;
+}
+
+footer {
+  padding: 24px;
+  color: #ecf0f1;
+  background-color: #bdc3c7;
+}
+
+footer a {
+  color: inherit;
 }
