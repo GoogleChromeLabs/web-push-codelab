@@ -11,11 +11,11 @@
   "scripts": {
     "start": "node app.js",
     "monitor": "nodemon app.js",
-    "deploy": "gcloud app deploy"
+    "deploy": "gcloud config set project web-push-codelab && gcloud app deploy"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.13.4",
-    "web-push": "^3.1.0"
+    "web-push": "^3.2.1"
   }
 }
