@@ -44,7 +44,7 @@ function sendPushMessage() {
     return Promise.reject(new Error('The subscription MUST have an endpoint'));
   }
 
-  if (subscriptionObject.endpoint.indexOf('...')) {
+  if (subscriptionObject.endpoint.indexOf('...') != -1) {
     return Promise.reject(new Error('The subscription endpoint appears to be ' +
       'truncated (It has \'...\' in it).\n\nDid you copy it from the console ' +
       'in Chrome?')
