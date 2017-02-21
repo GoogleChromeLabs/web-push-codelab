@@ -35,8 +35,6 @@ app.post('/api/send-push-msg', (req, res) => {
     TTL: 60 * 60
   };
 
-  console.log(req.body);
-
   webpush.sendNotification(
     req.body.subscription,
     req.body.data,
