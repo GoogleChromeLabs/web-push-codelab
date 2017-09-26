@@ -5,7 +5,6 @@
   "scripts": {
     "lint": "eslint '.'",
     "test": "npm run lint",
-    "deploy": "gcloud app deploy"
   },
   "devDependencies": {
     "eslint": "^3.8.1",
