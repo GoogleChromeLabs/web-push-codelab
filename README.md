@@ -1,6 +1,6 @@
 # Push Notifications codelab
 
-Code for the Web Fundamentals [Push Notifications codelab](https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en).
+Code for the Web Fundamentals [Push Notifications codelab](https://codelabs.developers.google.com/codelabs/push-notifications/).
 
 In this codelab, you'll learn how to add Push Notifications to web applications. This will enable you to re-engage users with breaking news and information about
 new content.
