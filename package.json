@@ -7,8 +7,8 @@
     "test": "npm run lint"
   },
   "devDependencies": {
-    "eslint": "^3.8.1",
-    "eslint-config-google": "^0.7.0"
+    "eslint": "^6.0.1",
+    "eslint-config-google": "^0.13.0"
   },
   "repository": {
     "type": "git",
