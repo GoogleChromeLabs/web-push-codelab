@@ -1,0 +1,13 @@
+on: [push,pull_request]
+name: Test
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+    - name: Install dependencies
+      run: npm install
+    - name: Run test
+      run: npm test
