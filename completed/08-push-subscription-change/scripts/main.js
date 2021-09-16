@@ -21,8 +21,8 @@
 
 'use strict';
 
-const applicationServerPublicKey = 'BJPMaDrbRiUzH8IeMvRMn7CcxFMIQzTEB1j62Kn' +
-  'gB5irgMhB9TPgcmMjwB7t1aRkUKDwzz9MMH3ASEKLKX_mqjk';
+const applicationServerPublicKey = 'BHdd2PwLOsYaDQQOmqw_8KIIYOQYECWN' +
+  'lat0K8GScnytjV88e6Xifn0GMz7MbScAkxf_kVJhnp-0NrB_P4u6WHw';
 
 const pushButton = document.querySelector('.js-push-btn');
 
@@ -83,7 +83,7 @@ function subscribeUser() {
     applicationServerKey: applicationServerKey
   })
   .then(function(subscription) {
-    console.log('User is subscribed:', subscription);
+    console.log('User is subscribed.');
 
     updateSubscriptionOnServer(subscription);
 
@@ -117,7 +117,7 @@ function unsubscribeUser() {
   });
 }
 
-function initialiseUI() {
+function initializeUI() {
   pushButton.addEventListener('click', function() {
     pushButton.disabled = true;
     if (isSubscribed) {
@@ -152,7 +152,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
     console.log('Service Worker is registered', swReg);
 
     swRegistration = swReg;
-    initialiseUI();
+    initializeUI();
   })
   .catch(function(error) {
     console.error('Service Worker Error', error);
